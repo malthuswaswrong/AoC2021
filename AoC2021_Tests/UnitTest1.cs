@@ -3,7 +3,7 @@ using AoC2021_01_01;
 using System.IO;
 using System.Diagnostics;
 
-namespace AoC2021_01_01_Tests
+namespace AoC2021_Tests
 {
     public class UnitTest1
     {
