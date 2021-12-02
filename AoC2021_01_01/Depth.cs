@@ -1,36 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AoC2021_01_01;
+﻿namespace AoC2021_01_01;
 public class Depth
 {
     private Dictionary<int, List<int>> depths;
     public Depth()
     {
         depths = new() { { 0, new() } };
-
     }
     public void AddSingleDepth(string input)
     {
-        int.TryParse(input, out int depthInt);
-        depths[0].Add(depthInt);
+        depths[0].Add(int.Parse(input));
     }
     public void AddMultiDepth(string input)
     {
         int.TryParse(input, out int depthInt);
         int maxIdx = depths.Keys.Max() + 1;
         depths.Add(maxIdx, new() { depthInt });
-        for(int i = maxIdx - 1; i >= 0 && depths[i].Count() < 3; i--)
-        {
+        for (int i = maxIdx - 1; i >= 0 && depths[i].Count() < 3; i--)
             depths[i].Add(depthInt);
-        }
     }
-    public int Increaments
+    public int Increaments 
     {
-        get
+        get 
         {
             int result = 0;
             int? lastDepth = null;
@@ -52,8 +42,6 @@ public class Depth
                 }
             }
             return result;
-
         }
-        
     }
 }

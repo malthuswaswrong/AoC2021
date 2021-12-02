@@ -2,6 +2,7 @@ using Xunit;
 using AoC2021_01_01;
 using System.IO;
 using System.Diagnostics;
+using AoC_2021_02;
 
 namespace AoC2021_Tests
 {
@@ -65,5 +66,57 @@ namespace AoC2021_Tests
 
             Assert.Equal(1743, cut.Increaments);
         }
+        [Fact]
+        public void AoC2021_02_01_Example()
+        {
+            NavigatingSub cut = new();
+            cut.ProcessCommand("forward 5");
+            cut.ProcessCommand("down 5");
+            cut.ProcessCommand("forward 8");
+            cut.ProcessCommand("up 3");
+            cut.ProcessCommand("down 8");
+            cut.ProcessCommand("forward 2");
+
+            Assert.Equal(150, cut.Answer);
+        }
+
+        [Fact]
+        public void AoC2021_02_01_Challenge()
+        {
+            NavigatingSub cut = new();
+            using StreamReader sr = new StreamReader("Input_AoC2021_02.txt");
+            while (!sr.EndOfStream) cut.ProcessCommand(sr.ReadLine());
+
+            Debug.WriteLine(cut.Answer.ToString());
+
+            Assert.Equal(1840243, cut.Answer);
+        }
+        [Fact]
+        public void AoC2021_02_02_Example()
+        {
+            NavigatingSub cut = new();
+            cut.ProcessCommandWithAim("forward 5");
+            cut.ProcessCommandWithAim("down 5");
+            cut.ProcessCommandWithAim("forward 8");
+            cut.ProcessCommandWithAim("up 3");
+            cut.ProcessCommandWithAim("down 8");
+            cut.ProcessCommandWithAim("forward 2");
+
+            Assert.Equal(900, cut.Answer);
+        }
+
+        [Fact]
+        public void AoC2021_02_02_Challenge()
+        {
+            NavigatingSub cut = new();
+            using StreamReader sr = new StreamReader("Input_AoC2021_02.txt");
+            while (!sr.EndOfStream) cut.ProcessCommandWithAim(sr.ReadLine());
+
+            Debug.WriteLine(cut.Answer.ToString());
+
+            Assert.Equal(1727785422, cut.Answer);
+        }
     }
+
+    
 }

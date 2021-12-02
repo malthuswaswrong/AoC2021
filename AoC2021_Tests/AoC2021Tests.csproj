@@ -22,10 +22,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AoC2021_01_01\AoC2021_01.csproj" />
+    <ProjectReference Include="..\AoC_2021\AoC_2021_02\AoC_2021_02.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="Input_AoC2021_01_01.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Input_AoC2021_02.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
