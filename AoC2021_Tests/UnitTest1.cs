@@ -15,7 +15,7 @@ namespace AoC2021_Tests
             get
             {
                 List<string> list = new List<string>(){"199","200","208","210","200","207","240","269","260","263"};
-                return new ChallengeInput(ChallengeInput.StreamReaderFromList(list));
+                return new ChallengeInput(list);
             }
         }
         public ChallengeInput AoC2021_02_SampleInput
@@ -23,7 +23,7 @@ namespace AoC2021_Tests
             get
             {
                 List<string> list = new List<string>(){"forward 5","down 5","forward 8","up 3","down 8","forward 2"};
-                return new ChallengeInput(ChallengeInput.StreamReaderFromList(list));
+                return new ChallengeInput(list);
             }
         }
         public ChallengeInput AoC2021_03_SampleInput
@@ -44,7 +44,7 @@ namespace AoC2021_Tests
                     "00010",
                     "01010"
                 };
-                return new ChallengeInput(ChallengeInput.StreamReaderFromList(list));
+                return new ChallengeInput(list);
             }
         }
         [Fact]
@@ -56,12 +56,12 @@ namespace AoC2021_Tests
                 "THREE"
             };
 
-            ChallengeInput cut = new(ChallengeInput.StreamReaderFromList(input), (input) => { return input.ToUpper(); });
+            ChallengeInput cut = new(input, (input) => { return input.ToUpper(); });
             Assert.NotNull(cut);
             Assert.Equal(3, cut.Inputs.Count);
             Assert.True(Char.IsUpper(cut.Inputs[0][0]));
 
-            cut = new(ChallengeInput.StreamReaderFromList(input));
+            cut = new(input);
             Assert.NotNull(cut);
             Assert.Equal(3, cut.Inputs.Count);
             Assert.False(Char.IsUpper(cut.Inputs[0][0]));

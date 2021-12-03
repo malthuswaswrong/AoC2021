@@ -19,10 +19,13 @@ public class ChallengeInput
             else
                 Inputs.Add(inputStream.ReadLine());
         }
-            
+    }
+    public ChallengeInput(List<string> inputList, Func<string, string> inputProcessor = null)
+        : this(StreamReaderFromList(inputList), inputProcessor)
+    {
     }
 
-    public static StreamReader StreamReaderFromList(List<string> inputList)
+    private static StreamReader StreamReaderFromList(List<string> inputList)
     {
         var stream = new MemoryStream();
         var writer = new StreamWriter(stream);
