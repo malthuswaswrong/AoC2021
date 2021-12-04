@@ -1,11 +1,6 @@
 ﻿namespace AoC2021;
 public class Depth : ChallengeBase
 {
-    public enum MODE
-    {
-        SINGLE,
-        WINDOW
-    }
     private Dictionary<int, List<int>> depths;
     public Depth(ChallengeInput input, Part part) : base(input, part)
     {

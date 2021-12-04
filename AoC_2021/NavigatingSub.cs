@@ -1,11 +1,6 @@
 ﻿namespace AoC2021;
 public class NavigatingSub : ChallengeBase
 {
-    public enum MODE
-    {
-        WITHAIM,
-        NOAIM
-    }
     private int distance, depth, aim = 0;
 
     public NavigatingSub(ChallengeInput input, Part part) : base(input, part)
