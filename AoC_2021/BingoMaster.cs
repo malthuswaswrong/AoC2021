@@ -19,8 +19,7 @@ public class BingoMaster : ChallengeBase
     {
         get
         {
-            BingoBoard? firstBoard = null;
-            BingoBoard? lastBoard = null;
+            BingoBoard? firstBoard = null, lastBoard = null;
             List<int> ballSet = new List<int>();
             foreach (var ball in input.Inputs[0].Split(","))
                 ballSet.Add(int.Parse(ball));
@@ -43,10 +42,7 @@ public class BingoMaster : ChallengeBase
                 if (newBoard.TurnWin > lastBoard.TurnWin) lastBoard = newBoard;
             }
 
-            if (part == Part.ONE)
-                return firstBoard.Score.Value;
-            else
-                return lastBoard.Score.Value;
+            return (part == Part.ONE) ? firstBoard.Score.Value : lastBoard.Score.Value;
         }
     }
     public class BingoBoard
