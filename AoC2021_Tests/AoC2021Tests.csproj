@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AoC2021_01_01\AoC2021.csproj" />
     <ProjectReference Include="..\AoC_2021\AoC2021.csproj" />
   </ItemGroup>
 

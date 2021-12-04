@@ -82,13 +82,13 @@ namespace AoC2021_Tests
         [Fact]
         public void AoC2021_01_01_Challenge()
         {
-            IChallenge cut = new Depth(new(new StreamReader("Input_AoC2021_01_01.txt")), ChallengeBase.Part.ONE);
+            IChallenge cut = new Depth(new(new StreamReader("Input_AoC2021_01.txt")), ChallengeBase.Part.ONE);
             Assert.Equal(1711, cut.Answer);
         }
         [Fact]
         public void AoC2021_01_02_Challenge()
         {
-            IChallenge cut = new Depth(new(new StreamReader("Input_AoC2021_01_01.txt")), ChallengeBase.Part.TWO);
+            IChallenge cut = new Depth(new(new StreamReader("Input_AoC2021_01.txt")), ChallengeBase.Part.TWO);
             Assert.Equal(1743, cut.Answer);
         }
         [Fact]
