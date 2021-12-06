@@ -14,7 +14,7 @@ namespace AoC2021_Tests
         {
             get
             {
-                List<string> list = new List<string>(){"199","200","208","210","200","207","240","269","260","263"};
+                List<string> list = new List<string>() { "199", "200", "208", "210", "200", "207", "240", "269", "260", "263" };
                 return new ChallengeInput(list);
             }
         }
@@ -22,7 +22,7 @@ namespace AoC2021_Tests
         {
             get
             {
-                List<string> list = new List<string>(){"forward 5","down 5","forward 8","up 3","down 8","forward 2"};
+                List<string> list = new List<string>() { "forward 5", "down 5", "forward 8", "up 3", "down 8", "forward 2" };
                 return new ChallengeInput(list);
             }
         }
@@ -71,6 +71,25 @@ namespace AoC2021_Tests
                     "18  8 23 26 20",
                     "22 11 13  6  5",
                     " 2  0 12  3  7"
+                };
+                return new ChallengeInput(list);
+            }
+        }
+        public ChallengeInput AoC2021_05_SampleInput
+        {
+            get
+            {
+                List<string> list = new List<string>() {
+                    "0,9 -> 5,9",
+                    "8,0 -> 0,8",
+                    "9,4 -> 3,4",
+                    "2,2 -> 2,1",
+                    "7,0 -> 7,4",
+                    "6,4 -> 2,0",
+                    "0,9 -> 2,9",
+                    "3,4 -> 1,4",
+                    "0,0 -> 8,8",
+                    "5,5 -> 8,2"
                 };
                 return new ChallengeInput(list);
             }
@@ -195,6 +214,30 @@ namespace AoC2021_Tests
         {
             IChallenge cut = new BingoMaster(new ChallengeInput(new StreamReader("Input_AoC2021_04.txt")), ChallengeBase.Part.TWO);
             Assert.Equal(24742, cut.Answer);
+        }
+        [Fact]
+        public void AoC2021_05_01_Example()
+        {
+            IChallenge cut = new VentTracker(AoC2021_05_SampleInput, ChallengeBase.Part.ONE);
+            Assert.Equal(5, cut.Answer);
+        }
+        [Fact]
+        public void AoC2021_05_01_Challenge()
+        {
+            IChallenge cut = new VentTracker(new ChallengeInput(new StreamReader("Input_AoC2021_05.txt")), ChallengeBase.Part.ONE);
+            Assert.Equal(4655, cut.Answer);
+        }
+        [Fact]
+        public void AoC2021_05_02_Example()
+        {
+            IChallenge cut = new VentTracker(AoC2021_05_SampleInput, ChallengeBase.Part.TWO);
+            Assert.Equal(12, cut.Answer);
+        }
+        [Fact]
+        public void AoC2021_05_02_Challenge()
+        {
+            IChallenge cut = new VentTracker(new ChallengeInput(new StreamReader("Input_AoC2021_05.txt")), ChallengeBase.Part.TWO);
+            Assert.Equal(-1, cut.Answer);
         }
     }
 
