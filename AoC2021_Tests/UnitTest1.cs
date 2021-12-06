@@ -271,7 +271,7 @@ namespace AoC2021_Tests
         public void AoC2021_06_02_Challenge()
         {
             IChallenge cut = new FishCounter(new ChallengeInput(new StreamReader("Input_AoC2021_06.txt")), ChallengeBase.Part.TWO);
-            Assert.Equal(-2, cut.Answer);
+            Assert.Equal(1644286074024, cut.Answer);
         }
     }
 

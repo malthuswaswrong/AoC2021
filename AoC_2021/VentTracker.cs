@@ -69,7 +69,7 @@ public class VentTracker : ChallengeBase
             new Point(int.Parse(tarr3[0]), int.Parse(tarr3[1]))
             );
     }
-    public override int Answer
+    public override long Answer
     {
         get
         {

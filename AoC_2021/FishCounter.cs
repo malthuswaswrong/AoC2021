@@ -10,29 +10,41 @@ namespace AoC2021
     {
         private readonly ChallengeInput input;
         private readonly Part part;
-        private List<Fish> school;
+        private long[] fishByDay = new long[9];
         public FishCounter(ChallengeInput input, Part part) : base(input, part)
         {
             this.input = input;
             this.part = part;
-            school = new List<Fish>();
+            Array.Clear(fishByDay, 0, 9);
+
             var initFish = input.Inputs[0].Split(",");
             foreach(var f in initFish)
-            {
-                school.Add(new Fish(int.Parse(f)));
-            }
+                fishByDay[int.Parse(f)]++;
         }
-        public override int Answer
+        public override long Answer
         {
             get
             {
                 int daysToLoop = (part == Part.ONE) ? 80 : 256;
-                
-                for(int i = 0; i < daysToLoop; i++)
+                long[] storage = new long[9];
+                for (int day = 0; day < daysToLoop; day++)
                 {
-                    school.ForEach(fish => fish.ProcDay());
+                    Array.Clear(storage, 0, 9);
+                    for (int pointer = 8; pointer >= 0; pointer--)
+                    {
+                        if (pointer == 0)
+                        {
+                            storage[8] = fishByDay[0];
+                            storage[6] += fishByDay[0];
+                        }
+                        else
+                        {
+                            storage[pointer - 1] = fishByDay[pointer];
+                        }
+                    }
+                    storage.CopyTo(fishByDay, 0);
                 }
-                return school.Count() + school.Sum(x => x.MyFishCount);
+                return fishByDay.ToList().Sum(x => x);
             }
         }
     }

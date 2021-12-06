@@ -16,5 +16,5 @@ public class ChallengeBase : IChallenge
     {
     }
 
-    public virtual int Answer => throw new NotImplementedException();
+    public virtual long Answer => throw new NotImplementedException();
 }

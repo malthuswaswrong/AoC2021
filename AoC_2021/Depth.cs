@@ -26,7 +26,7 @@ public class Depth : ChallengeBase
         for (int i = maxIdx - 1; i >= 0 && depths[i].Count() < 3; i--)
             depths[i].Add(depthInt);
     }
-    public override int Answer
+    public override long Answer
     {
         get 
         {

@@ -15,7 +15,7 @@ public class NavigatingSub : ChallengeBase
         }
     }
 
-    public override int Answer => distance * depth;
+    public override long Answer => distance * depth;
     private void ProcessCommand(string command)
     {
         var args = command.Split(' ');
