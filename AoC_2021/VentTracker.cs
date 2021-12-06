@@ -99,40 +99,25 @@ public class VentTracker : ChallengeBase
                     return intersectingPoints;
 
                 intersectingPoints = new List<Point>();
-                int max = (int)Math.Max(Math.Max(Start.X, Start.Y), Math.Max(End.X, End.Y)) + 1;
-                int min = (int)Math.Min(Math.Min(Start.X, Start.Y), Math.Min(End.X, End.Y));
-                for(int x = min; x < max; x++)
+
+
+                int xDirection = (End.X > Start.X) ? 1 : (End.X == Start.X) ? 0 : -1;
+                int yDirection = (End.Y > Start.Y) ? 1 : (End.Y == Start.Y) ? 0 : -1;
+
+                Point cursor = new Point(Start.X, Start.Y);
+                while (true)
                 {
-                    for(int y = min; y < max; y++)
-                    {
-                        var chk = new Point(x, y);
-                        if(Intersects(chk))
-                            intersectingPoints.Add(chk);
-                    }
+                    intersectingPoints.Add(cursor);
+                    cursor.X += xDirection;
+                    cursor.Y += yDirection;
+                    if ((cursor.X == End.X && cursor.Y == End.Y) || Math.Abs(cursor.X) > 10000)
+                        break;
                 }
+                intersectingPoints.Add(cursor);
+
                 return intersectingPoints;
             }
         }
-        public bool Intersects(Point P)
-        {
-            if (Start.X == End.X && P.X == Start.X && Between(Start.Y, End.Y, P.Y))
-                return true;
-            if (Start.Y == End.Y && P.Y == Start.Y && Between(Start.X, End.X, P.X))
-                return true;
-
-            if(Between(Start.Y, End.Y, P.Y) && Between(Start.X, End.X, P.X))
-            {
-                return ((P.X - Start.X) == (P.Y - Start.Y));
-            }
-
-            return false;
-        }
-        private bool Between(int p1, int p2, int t1)
-        {
-            if (p1 < p2)
-                return (p1 <= t1 && t1 <= p2);
-            else
-                return (p2 <= t1 && t1 <= p1);
-        }
+        
     }
 }

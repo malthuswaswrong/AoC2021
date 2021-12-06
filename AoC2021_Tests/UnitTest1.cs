@@ -237,7 +237,7 @@ namespace AoC2021_Tests
         public void AoC2021_05_02_Challenge()
         {
             IChallenge cut = new VentTracker(new ChallengeInput(new StreamReader("Input_AoC2021_05.txt")), ChallengeBase.Part.TWO);
-            Assert.Equal(-1, cut.Answer);
+            Assert.Equal(20500, cut.Answer);
         }
     }
 
