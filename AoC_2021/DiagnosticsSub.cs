@@ -85,7 +85,7 @@ public class DiagnosticsSub : ChallengeBase
     }
 
 
-    public override int Answer
+    public override long Answer
     {
         get
         {

@@ -15,7 +15,7 @@ public class BingoMaster : ChallengeBase
         this.input = input;
         this.part = part;
     }
-    public override int Answer
+    public override long Answer
     {
         get
         {
