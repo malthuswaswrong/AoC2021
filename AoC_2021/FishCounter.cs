@@ -16,10 +16,10 @@ namespace AoC2021
             this.input = input;
             this.part = part;
             Array.Clear(fishByDay, 0, 9);
-
-            var initFish = input.Inputs[0].Split(",");
-            foreach(var f in initFish)
-                fishByDay[int.Parse(f)]++;
+            input.Inputs[0]
+                .Split(",")
+                .ToList()
+                .ForEach(f => fishByDay[int.Parse(f)]++);
         }
         public override long Answer
         {
@@ -38,47 +38,11 @@ namespace AoC2021
                             storage[6] += fishByDay[0];
                         }
                         else
-                        {
                             storage[pointer - 1] = fishByDay[pointer];
-                        }
                     }
                     storage.CopyTo(fishByDay, 0);
                 }
                 return fishByDay.ToList().Sum(x => x);
-            }
-        }
-    }
-    internal class Fish
-    {
-        private int timer;
-        private List<Fish> childFish;
-        public Fish(int startingTimer)
-        {
-            timer = startingTimer;
-            childFish = new List<Fish>();
-        }
-        public void ProcDay()
-        {
-            childFish.ForEach(fish => fish.ProcDay());
-
-            timer--;
-            if(timer < 0)
-            {
-                timer = 6;
-                childFish.Add(new Fish(8));
-            }
-        }
-        public int MyFishCount
-        {
-            get
-            {
-                int sum = 0;
-                foreach(Fish f in childFish)
-                {
-                    sum++;
-                    sum += f.MyFishCount;
-                }
-                return sum;
             }
         }
     }
