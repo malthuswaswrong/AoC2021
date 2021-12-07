@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AoC2021;
-public class ChallengeBase : IChallenge
+public abstract class ChallengeBase : IChallenge
 {
     public enum Part
     {
@@ -16,5 +16,5 @@ public class ChallengeBase : IChallenge
     {
     }
 
-    public virtual long Answer => throw new NotImplementedException();
+    public abstract long Answer { get; }
 }
