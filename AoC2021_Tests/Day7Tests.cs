@@ -26,18 +26,18 @@ public class Day7Tests
     public void AoC2021_07_01_Challenge()
     {
         IChallenge cut = new LaserCrabs(new ChallengeInput(new StreamReader("Input_AoC2021_07.txt")), ChallengeBase.Part.ONE);
-        Assert.Equal(-2, cut.Answer);
+        Assert.Equal(357353, cut.Answer);
     }
     [Fact]
     public void AoC2021_07_02_Example()
     {
         IChallenge cut = new LaserCrabs(AoC2021_07_SampleInput, ChallengeBase.Part.TWO);
-        Assert.Equal(-2, cut.Answer);
+        Assert.Equal(168, cut.Answer);
     }
     [Fact]
     public void AoC2021_07_02_Challenge()
     {
-        IChallenge cut = new LaserCrabs(new ChallengeInput(new StreamReader("Input_AoC2021_06.txt")), ChallengeBase.Part.TWO);
-        Assert.Equal(-2, cut.Answer);
+        IChallenge cut = new LaserCrabs(new ChallengeInput(new StreamReader("Input_AoC2021_07.txt")), ChallengeBase.Part.TWO);
+        Assert.Equal(104822130, cut.Answer);
     }
 }

@@ -27,11 +27,38 @@ public class LaserCrabs : ChallengeBase
     {
         get
         {
-            int mid = (int)crabPositions.Average();
-            int totalCrabMoveDistance = 0;
-            foreach(int crab in crabPositions)
-                totalCrabMoveDistance += Math.Abs(crab - mid);
-            return totalCrabMoveDistance;
+
+            int lowestCrabDistance = int.MaxValue;
+            int currentCrabMoveDistance = 0;
+
+            int minSearch = crabPositions.Min(x => x);
+            int maxSearch = crabPositions.Max(x => x);
+            for (int i = minSearch; i < crabPositions.Count; i++)
+            {
+                currentCrabMoveDistance = crabPositions.Sum(x => fuelCalc(x, i));
+                if (currentCrabMoveDistance < lowestCrabDistance)
+                    lowestCrabDistance = currentCrabMoveDistance;
+            }
+            return lowestCrabDistance;
+        }
+    }
+    private int fuelCalc(int current, int check)
+    {
+        if(part == Part.ONE)
+        {
+            return Math.Abs(current - check);
+        }
+        else
+        {
+            int dist = Math.Abs(current - check);
+            int cost = 1;
+            int fuel = 0;
+            for(int i = 0; i < dist; i++)
+            {
+                fuel+=cost;
+                cost++;
+            }
+            return fuel;
         }
     }
 }
