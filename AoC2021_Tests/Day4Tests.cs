@@ -5,7 +5,7 @@ using Xunit;
 
 namespace AoC2021Tests;
 
-public class Day4Tests
+public class Day04Tests
 {
     public ChallengeInput AoC2021_04_SampleInput
     {

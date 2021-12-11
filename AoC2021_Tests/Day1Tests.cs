@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System;
 
 namespace AoC2021Tests;
-public class Day1Tests
+public class Day01Tests
 {
     public ChallengeInput AoC2021_01_SampleInput
     {

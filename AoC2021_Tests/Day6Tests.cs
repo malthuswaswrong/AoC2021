@@ -4,7 +4,7 @@ using System.IO;
 using Xunit;
 
 namespace AoC2021Tests;
-public class Day6Tests
+public class Day06Tests
 {
     public ChallengeInput AoC2021_06_SampleInput
     {
