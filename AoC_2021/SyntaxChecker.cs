@@ -10,7 +10,8 @@ public class SyntaxChecker : ChallengeBase
 {
     private readonly ChallengeInput input;
     private readonly Part part;
-    private Dictionary<char, int> scoringTable;
+    private Dictionary<char, int> scoringTablePart1;
+    private Dictionary<char, int> scoringTablePart2;
     private readonly string openingCharacters;
     private readonly string closingCharacters;
 
@@ -20,50 +21,64 @@ public class SyntaxChecker : ChallengeBase
         this.part = part;
         openingCharacters = "([{<";
         closingCharacters = ")]}>";
-        scoringTable = new();
-        scoringTable.Add(')', 3);
-        scoringTable.Add(']', 57);
-        scoringTable.Add('}', 1197);
-        scoringTable.Add('>', 25137);
+        scoringTablePart1 = new();
+        scoringTablePart1.Add(')', 3);
+        scoringTablePart1.Add(']', 57);
+        scoringTablePart1.Add('}', 1197);
+        scoringTablePart1.Add('>', 25137);
+        scoringTablePart2 = new();
+        scoringTablePart2.Add('(', 1);
+        scoringTablePart2.Add('[', 2);
+        scoringTablePart2.Add('{', 3);
+        scoringTablePart2.Add('<', 4);
     }
 
     public override long Answer
     {
         get
         {
-            if (part == Part.ONE)
-            {
-                int answer = 0;
-                foreach (var line in input.Inputs)
-                {
-                    List<char> syntaxStack = new();
-                    foreach (char c in line)
-                    {
-                        if (openingCharacters.Contains(c))
-                        {
-                            syntaxStack.Add(c);
-                        }
-                        else
-                        {
-                            if(closingCharacters.Contains(c))
-                            {
-                                if (syntaxStack.Last() == openingCharacters[closingCharacters.IndexOf(c)])
-                                {
-                                    syntaxStack.RemoveAt(syntaxStack.Count - 1);
-                                }
-                                else
-                                {
-                                    answer+=scoringTable[c];
-                                    break;
-                                }
-                            }
-                        }
 
+            long part1Score = 0;
+            List<long> part2AnswerSet = new ();
+            foreach (var line in input.Inputs)
+            {
+                List<char> syntaxStack = new();
+                bool lineWasValid = true;
+                foreach (char c in line)
+                {
+                    if (openingCharacters.Contains(c)) syntaxStack.Add(c);
+                    else
+                    {
+                        if (closingCharacters.Contains(c))
+                            if (syntaxStack.Last() == openingCharacters[closingCharacters.IndexOf(c)])
+                                syntaxStack.RemoveAt(syntaxStack.Count - 1);
+                            else
+                            {
+                                part1Score += scoringTablePart1[c];
+                                lineWasValid = false;
+                                break;
+                            }
                     }
                 }
-                return answer;
+
+                if (part == Part.TWO && lineWasValid)
+                {
+                    long lineAnswer = 0;
+                    for (int i = syntaxStack.Count - 1; i >= 0; i--)
+                        lineAnswer = (lineAnswer * 5) + scoringTablePart2[syntaxStack[i]];
+
+                    if (lineAnswer < 0) throw new Exception("Wut");
+                    part2AnswerSet.Add(lineAnswer);
+                }
             }
-            throw new NotImplementedException();
+            if (part == Part.ONE)
+                return part1Score;
+            else
+            {
+                var sorted = part2AnswerSet.OrderBy(x => x).ToArray();
+                int mid = (int)Math.Floor(sorted.Length / 2d);
+                return sorted[mid];
+            }
         }
     }
 }
