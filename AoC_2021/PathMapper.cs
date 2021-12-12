@@ -28,23 +28,19 @@ public class PathMapper : ChallengeBase {
             paths.Add((names[1], names[0]));
         });
     }
-    public override long Answer {
-        get {
-            var progressedRoutes = Explore("start");
-            var validRoutes = progressedRoutes.Where(x => x.EndsWith("end")).ToList();
-            return validRoutes.Count();
-        }
-    }
-    public List<string> Explore(string path) {
-        List<string> results = new List<string>();
+    public override long Answer => Explore("start");
+    
+    public long Explore(string path) {
+        long results = 0;
         string endNode = path.Split("->").Last();
         foreach (var nextNode in paths.Where(x => x.p1 == endNode).Select(x => x.p2)) {
             if (nextNode == "start") continue;
             if (PathWouldBeInvalid(path, nextNode)) continue;
             string newPath = $"{path}->{nextNode}";
-            results.Add(newPath);
             if (nextNode != "end") {
-                results.AddRange(Explore(newPath));
+                results += Explore(newPath);
+            } else {
+                results++;
             }
         }
         return results;
