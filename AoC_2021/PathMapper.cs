@@ -29,7 +29,7 @@ public class PathMapper : ChallengeBase {
         });
     }
     public override long Answer => Explore("start");
-    
+
     public long Explore(string path) {
         long results = 0;
         string endNode = path.Split("->").Last();
@@ -46,26 +46,22 @@ public class PathMapper : ChallengeBase {
         return results;
     }
     private bool PathWouldBeInvalid(string path, string newNode) {
-        if (IsSmallCavern(newNode)) {
-            List<string> caves = path.Split("->").ToList();
-            caves.Add(newNode);
-            if (part == Part.ONE) {
-                return caves.Count(x => x == newNode) > 1;
-            } else {
-                Dictionary<string, int> oneCanBeTwice = new Dictionary<string, int>();
-                foreach (var cavern in caves.Where(x => IsSmallCavern(x))) {
-                    if (!oneCanBeTwice.ContainsKey(cavern))
-                        oneCanBeTwice.Add(cavern, 0);
-                    oneCanBeTwice[cavern]++;
-                }
-                if (oneCanBeTwice.Any(x => x.Value > 2))
-                    return true;
-                if (oneCanBeTwice.Count(x => x.Value > 1) > 1)
-                    return true;
+        if (!IsSmallCavern(newNode)) return false;
 
-                return false;
-            }
+        List<string> caves = path.Split("->").ToList();
+        caves.Add(newNode);
+        if (part == Part.ONE) {
+            return caves.Count(x => x == newNode) > 1;
         } else {
+            Dictionary<string, int> oneCanBeTwice = new Dictionary<string, int>();
+            foreach (var cavern in caves.Where(x => IsSmallCavern(x))) {
+                if (!oneCanBeTwice.ContainsKey(cavern))
+                    oneCanBeTwice.Add(cavern, 0);
+                oneCanBeTwice[cavern]++;
+            }
+            if (oneCanBeTwice.Any(x => x.Value > 2)) return true;
+            if (oneCanBeTwice.Count(x => x.Value > 1) > 1) return true;
+
             return false;
         }
     }
