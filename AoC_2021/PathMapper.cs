@@ -25,13 +25,12 @@ public class PathMapper : ChallengeBase {
 
     public long Explore(string path) {
         long results = 0;
-        string endNode = path.Split("->").Last();
-        foreach (var nextNode in paths.Where(x => x.p1 == endNode).Select(x => x.p2)) {
+        string lastSegment = path.Split("->").Last();
+        foreach (var nextNode in paths.Where(x => x.p1 == lastSegment).Select(x => x.p2)) {
             if (nextNode == "start") continue;
             if (PathWouldBeInvalid(path, nextNode)) continue;
-            string newPath = $"{path}->{nextNode}";
             if (nextNode != "end") {
-                results += Explore(newPath);
+                results += Explore($"{path}->{nextNode}");
             } else {
                 results++;
             }
