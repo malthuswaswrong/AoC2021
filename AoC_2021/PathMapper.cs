@@ -37,7 +37,7 @@ public class PathMapper : ChallengeBase {
         if (part == Part.ONE) {
             return caves.Count(x => x == newNode) > 1;
         } else {
-            Dictionary<string, int> oneCanBeTwice = new Dictionary<string, int>();
+            Dictionary<string, int> oneCanBeTwice = new();
             foreach (var cavern in caves.Where(x => IsSmallCavern(x))) {
                 if (!oneCanBeTwice.ContainsKey(cavern))
                     oneCanBeTwice.Add(cavern, 0);
