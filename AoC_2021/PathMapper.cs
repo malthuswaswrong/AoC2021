@@ -9,7 +9,7 @@ public class PathMapper : ChallengeBase {
         this.input = input;
         this.part = part;
         nodes = new();
-        paths = new List<(string p1, string p2)>();
+        paths = new ();
 
         this.input.Inputs.ForEach(x => {
             var names = x.Split("-");
