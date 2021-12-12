@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AoC2021;
+﻿namespace AoC2021;
 public class PathMapper : ChallengeBase {
     private readonly ChallengeInput input;
     private readonly Part part;
