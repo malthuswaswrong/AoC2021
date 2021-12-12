@@ -2,21 +2,15 @@
 public class PathMapper : ChallengeBase {
     private readonly ChallengeInput input;
     private readonly Part part;
-    List<string> nodes;
     List<(string p1, string p2)> paths;
 
     public PathMapper(ChallengeInput input, Part part) : base(input, part) {
         this.input = input;
         this.part = part;
-        nodes = new();
         paths = new ();
 
         this.input.Inputs.ForEach(x => {
             var names = x.Split("-");
-            if (!nodes.Contains(names[0]))
-                nodes.Add(names[0]);
-            if (!nodes.Contains(names[1]))
-                nodes.Add(names[1]);
             paths.Add((names[0], names[1]));
             paths.Add((names[1], names[0]));
         });
