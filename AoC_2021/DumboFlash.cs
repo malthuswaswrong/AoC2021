@@ -32,9 +32,9 @@ public class DumboFlash : ChallengeBase {
     }
 
     private void Octo_Flashed(object? sender, EventArgs e) {
-        
         var oct = (DumboOctopus)sender;
-        if (flashesPerStep.ContainsKey(oct.Step) == false) flashesPerStep.Add(oct.Step, 0);
+        if (flashesPerStep.ContainsKey(oct.Step) == false)
+            flashesPerStep.Add(oct.Step, 0);
 
         flashesPerStep[oct.Step]++;
     }
@@ -47,42 +47,13 @@ public class DumboFlash : ChallengeBase {
                 school.ForEach(x => x.ProcessFlash());
                 school.ForEach(x => x.PostFlashCleanup());
 
-                if(part == Part.TWO &&
+                if (part == Part.TWO &&
                     flashesPerStep.ContainsKey(i) &&
                     flashesPerStep[i] == school.Count())
-                        return i + 1;
-
+                    return i + 1;
             }
             return school.Sum(x => x.FlashCount);
-
         }
-    }
-
-    private void DumpGrid(string filename) {
-        StringBuilder sbPowerLevel = new StringBuilder();
-        StringBuilder sbFlashCount = new StringBuilder();
-        StringBuilder sbTurn = new StringBuilder();
-
-        
-        for (int y = 0; y < 10; y++) {
-            for (int x = 0; x < 10; x++) {
-                var oct = school.Where(o => o.Location.X == x && o.Location.Y == y).First();
-                string powerOutput = (oct.ChargeLevel > 9) ? "*" : oct.ChargeLevel.ToString();
-                sbPowerLevel.Append(powerOutput);
-                sbFlashCount.Append($"{oct.FlashCount}|");
-                sbTurn.Append($"{oct.Step}|");
-            }
-            sbPowerLevel.AppendLine("");
-            sbFlashCount.AppendLine("");
-            sbTurn.AppendLine("");
-        }
-        using StreamWriter sw = new StreamWriter($@"c:\temp\oct\{filename}.txt", false);
-        sw.WriteLine("----------Power Levels-----------");
-        sw.WriteLine(sbPowerLevel.ToString());
-        sw.WriteLine("----------Flash Counts-----------");
-        sw.WriteLine(sbFlashCount.ToString());
-        sw.WriteLine("----------Turn Counts-----------");
-        sw.WriteLine(sbTurn.ToString());
     }
 
     public class DumboOctopus {
@@ -90,20 +61,19 @@ public class DumboFlash : ChallengeBase {
             get; set;
         }
         public readonly Point Location;
-        public int ChargeLevel { get; set; }
+        public int ChargeLevel {
+            get; set;
+        }
         private bool hasFlashed;
         public event EventHandler Flashed;
-        private long totalFlashCount;
         public long FlashCount {
-            get {
-                return totalFlashCount;
-            }
+            get; set;
         }
         public DumboOctopus(int x, int y, int initialChargeLevel) {
             Location = new Point(x, y);
             ChargeLevel = initialChargeLevel;
             hasFlashed = false;
-            totalFlashCount = 0;
+            FlashCount = 0;
             Step = 0;
         }
         public void IncreasePower() {
@@ -120,25 +90,14 @@ public class DumboFlash : ChallengeBase {
         public void Flash() {
             if (hasFlashed) return;
             hasFlashed = true;
-            totalFlashCount++;
+            FlashCount++;
             Flashed?.Invoke(this, EventArgs.Empty);
         }
         public void RegisterNeighborOctopus(DumboOctopus dumboOctopus) {
             if (Math.Abs(this.Location.X - dumboOctopus.Location.X) <= 1 &&
-               Math.Abs(this.Location.Y - dumboOctopus.Location.Y) <= 1) {
+               Math.Abs(this.Location.Y - dumboOctopus.Location.Y) <= 1)
                 dumboOctopus.Flashed += this.DumboOctopus_Flashed;
-                OctoLog($"Listening to (x:{dumboOctopus.Location.X},y:{dumboOctopus.Location.Y})");
-            } else {
-                //OctoLog($"Declined (x:{dumboOctopus.Location.X},y:{dumboOctopus.Location.Y})");
-            }
         }
-
-        private void OctoLog(string v) {
-            using StreamWriter sw = new StreamWriter($@"c:\temp\oct\registration_{this.Location.X}_{this.Location.Y}", true);
-            sw.WriteLine(v);
-            sw.Close();
-        }
-
         public void DumboOctopus_Flashed(object? sender, EventArgs e) {
             ChargeLevel++;
             if (ChargeLevel > 9)
