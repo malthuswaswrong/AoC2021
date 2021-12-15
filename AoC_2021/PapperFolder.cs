@@ -41,7 +41,9 @@ public class PapperFolder : ChallengeBase {
                 int i = 1;
                 foreach (var fold in folds) {
                     Fold(fold);
+#if DEBUG
                     DumpMarks($@"c:\temp\paper{i++}.txt");
+#endif
                 }
                 
                 return marks.Count();
