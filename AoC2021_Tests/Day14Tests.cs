@@ -24,6 +24,6 @@ public class Day14Tests {
     [Fact]
     public void AoC2021_14_02_Challenge() {
         IChallenge cut = new PolymerInserts(new ChallengeInput(new StreamReader("Input_AoC2021_14.txt")), ChallengeBase.Part.TWO);
-        Assert.Equal(0, cut.Answer);
+        Assert.Equal(2875665202438, cut.Answer);
     }
 }
