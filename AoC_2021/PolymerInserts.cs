@@ -52,36 +52,4 @@ public class PolymerInserts : ChallengeBase {
             return max - min;
         }
     }
-    //public long AnswerSlow {
-    //    get {
-    //        int loopLimit = (part == Part.ONE) ? 10 : 40;
-
-    //        string currentPattern = template;
-    //        Dictionary<int, string?> insertLookup;
-    //        for (int i = 0; i < loopLimit; i++) {
-    //            insertLookup = new();
-    //            for (int j = 0; j < currentPattern.Length - 1; j++) {
-    //                string search = currentPattern.Substring(j, 2);
-    //                insertLookup.Add(j, rules.Where(x => x.match == search).Select(y => y.insert).FirstOrDefault());
-    //            }
-    //            StringBuilder nextPattern = new();
-    //            for (int j = 0; j < currentPattern.Length; j++) {
-    //                nextPattern.Append(currentPattern[j]);
-    //                if (insertLookup.ContainsKey(j) && insertLookup[j] != null) {
-    //                    nextPattern.Append(insertLookup[j]);
-    //                }
-    //            }
-    //            currentPattern = nextPattern.ToString();
-    //        }
-    //        Dictionary<char, int> cnt = new();
-    //        for (int i = 0; i < currentPattern.Length; i++) {
-    //            if (!cnt.ContainsKey(currentPattern[i])) cnt.Add(currentPattern[i], 0);
-    //            cnt[currentPattern[i]]++;
-    //        }
-    //        var min = cnt.Min(x => x.Value);
-    //        var max = cnt.Max(x => x.Value);
-    //        return max - min;
-    //    }
-
-    //}
 }
